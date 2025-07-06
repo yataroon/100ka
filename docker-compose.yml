@@ -1,0 +1,14 @@
+services:
+  payara-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "4848:4848"
+      - "9009:9009"
+    volumes:
+      - ./server/deployments:/opt/payara/deployments
+    environment:
+      - PAYARA_ARGS=--verbose
+    container_name: payara-server
