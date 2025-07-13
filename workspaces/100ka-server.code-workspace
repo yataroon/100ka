@@ -10,6 +10,7 @@
     "java.saveActions.organizeImports": true,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "conventionalCommits.scopes": ["server"]
   }
 }
