@@ -18,6 +18,7 @@ public class PlayerJoinedEvent {
     /**
      * * メッセージタイプ
      */
+    @Builder.Default
     private String type = MessageTypes.PLAYER_JOINED;
 
     /**

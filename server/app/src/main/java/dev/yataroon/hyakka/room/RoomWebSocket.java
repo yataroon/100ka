@@ -2,8 +2,6 @@ package dev.yataroon.hyakka.room;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jakarta.inject.Inject;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.OnClose;
@@ -15,8 +13,6 @@ import jakarta.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/room/{roomId}")
 public class RoomWebSocket {
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * * ルームマネージャー

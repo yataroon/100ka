@@ -18,6 +18,7 @@ public class PlayerLeftEvent {
     /**
      * * メッセージタイプ
      */
+    @Builder.Default
     private String type = MessageTypes.PLAYER_LEFT;
 
     /**
