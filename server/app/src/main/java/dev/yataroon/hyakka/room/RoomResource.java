@@ -2,7 +2,7 @@ package dev.yataroon.hyakka.room;
 
 import java.util.List;
 
-import dev.yataroon.hyakka.room.dto.RoomResponseDTO;
+import dev.yataroon.hyakka.room.dto.common.RoomDTO;
 import dev.yataroon.hyakka.room.dto.response.ListRoomResponse;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -23,7 +23,7 @@ public class RoomResource {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response listRooms() {
-        List<RoomResponseDTO> roomList = roomService.getAllRooms();
+        List<RoomDTO> roomList = roomService.getAllRooms();
 
         ListRoomResponse response = ListRoomResponse.builder()
                 .rooms(roomList)

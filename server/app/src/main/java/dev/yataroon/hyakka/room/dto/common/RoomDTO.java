@@ -1,4 +1,4 @@
-package dev.yataroon.hyakka.room.dto;
+package dev.yataroon.hyakka.room.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomResponseDTO {
+public class RoomDTO {
 
     /**
      * * ルームID

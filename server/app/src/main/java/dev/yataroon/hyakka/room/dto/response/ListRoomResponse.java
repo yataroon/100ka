@@ -2,7 +2,7 @@ package dev.yataroon.hyakka.room.dto.response;
 
 import java.util.List;
 
-import dev.yataroon.hyakka.room.dto.RoomResponseDTO;
+import dev.yataroon.hyakka.room.dto.common.RoomDTO;
 import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class ListRoomResponse {
      * * ルームリスト
      */
     @JsonbProperty("rooms")
-    private List<RoomResponseDTO> rooms;
+    private List<RoomDTO> rooms;
 
     /**
      * * ルーム数

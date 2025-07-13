@@ -7,16 +7,16 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import dev.yataroon.hyakka.room.RoomModel;
-import dev.yataroon.hyakka.room.dto.RoomResponseDTO;
+import dev.yataroon.hyakka.room.dto.common.RoomDTO;
 import jakarta.websocket.Session;
 
 @Mapper(componentModel = "cdi")
 public interface RoomMapper {
 
     @Mapping(target = "currentPlayers", expression = "java(getCurrentPlayersCount(room.getSessions()))")
-    RoomResponseDTO toDto(RoomModel room);
+    RoomDTO toDto(RoomModel room);
 
-    List<RoomResponseDTO> toDtoList(List<RoomModel> rooms);
+    List<RoomDTO> toDtoList(List<RoomModel> rooms);
 
     default int getCurrentPlayersCount(Set<Session> sessions) {
         return sessions != null ? sessions.size() : 0;
