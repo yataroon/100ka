@@ -2,6 +2,7 @@ package dev.yataroon.hyakka.room;
 
 import java.io.IOException;
 
+import dev.yataroon.hyakka.room.result.PlayerJoinResult;
 import jakarta.inject.Inject;
 import jakarta.websocket.CloseReason;
 import jakarta.websocket.OnClose;
@@ -21,6 +22,12 @@ public class RoomWebSocket {
     private RoomManager roomManager;
 
     /**
+     * * セッションマネージャー
+     */
+    @Inject
+    private RoomSessionManager roomSessionManager;
+
+    /**
      * * コネクション確立時
      * 
      * @param session
@@ -29,7 +36,9 @@ public class RoomWebSocket {
     @OnOpen
     public void onOpen(Session session, @PathParam("roomId") String roomId) {
         try {
-            roomManager.handlePlayerJoin(session, roomId);
+            PlayerJoinResult result = roomManager.handlePlayerJoin(session, roomId);
+            roomSessionManager.setCurrentRoom(result.room());
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to handle player join", e);
         }

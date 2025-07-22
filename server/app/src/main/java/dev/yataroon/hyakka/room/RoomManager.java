@@ -8,6 +8,7 @@ import dev.yataroon.hyakka.room.constants.MessageTypes;
 import dev.yataroon.hyakka.room.constants.SessionKeys;
 import dev.yataroon.hyakka.room.message.event.PlayerJoinedEvent;
 import dev.yataroon.hyakka.room.message.event.PlayerLeftEvent;
+import dev.yataroon.hyakka.room.result.PlayerJoinResult;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.websocket.Session;
@@ -27,9 +28,9 @@ public class RoomManager {
      * @param session
      * @param roomId
      */
-    public void handlePlayerJoin(Session session, String roomId) throws IOException {
+    public PlayerJoinResult handlePlayerJoin(Session session, String roomId) throws IOException {
         // ルームに参加
-        addSessionToRoom(roomId, session);
+        RoomModel room = addSessionToRoom(roomId, session);
 
         // プレイヤーIDを生成・設定
         String playerId = generatePlayerId(session);
@@ -45,6 +46,8 @@ public class RoomManager {
                 .build();
 
         broadcastToRoom(roomId, event, session);
+
+        return new PlayerJoinResult(room);
     }
 
     /**
@@ -119,7 +122,7 @@ public class RoomManager {
      * @param roomId
      * @param session
      */
-    public void addSessionToRoom(String roomId, Session session) {
+    private RoomModel addSessionToRoom(String roomId, Session session) {
         // ルームを取得または作成
         RoomModel room = roomStore.getRoomMap()
                 .computeIfAbsent(roomId, k -> createNewRoom(roomId));
@@ -131,6 +134,8 @@ public class RoomManager {
         room.getSessions().add(session);
 
         session.getUserProperties().put(SessionKeys.ROOM_ID, roomId);
+
+        return room;
     }
 
     /**
